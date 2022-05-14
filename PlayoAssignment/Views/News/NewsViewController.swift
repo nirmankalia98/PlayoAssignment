@@ -29,19 +29,11 @@ class NewsViewController: UITableViewController {
     @objc func refreshData(){
         newsViewModel.getNewsArticles()
     }
-    
+        
     func setupCombineSubs(){
         newsViewModel.$articles
             .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: {result in
-                switch result{
-                case .failure(let err):
-                    print(err.localizedDescription)
-                    break
-                default: break
-                }
-                
-            }, receiveValue: {[weak self] articles in
+            .sink(receiveValue: {[weak self] articles in
                 self?.tableView.reloadData()
             })
             .store(in: &cancellables)

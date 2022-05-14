@@ -24,10 +24,10 @@ class NewsViewModel: ObservableObject{
             return
         }
         NetworkService.shared.fetchData(type: Result.self, url: url, completion: {[weak self] res in
+            self?.isLoading = false
             guard let res = res else {return}
             
             self?.articles = res.articles.map{ArticleViewModel(_article: $0)}
-            self?.isLoading = false
             
         })
     }

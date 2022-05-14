@@ -42,7 +42,6 @@ struct NetworkService{
     
     func fetchData(url: URL,completion: @escaping (Data?)->Void){
         URLSession.shared.dataTask(with: url){data, response, error in
-            
             if let data = data,let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
                     completion(data)                
             }else if let error = error{
@@ -52,7 +51,6 @@ struct NetworkService{
                 print("❌",#file,#function,#line,"unspecific error",response.debugDescription)
                 completion(nil)
             }
-            
         }.resume()
         
     }
