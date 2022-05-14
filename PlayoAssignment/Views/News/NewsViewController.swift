@@ -11,7 +11,11 @@ class NewsViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        NetworkService.shared.fetchData(type: Result.self, url: URL(string: Constants.baseUrl + Constants.apiKey)!){res in
+            print(res.debugDescription)
+            
+        }
     }
 
 

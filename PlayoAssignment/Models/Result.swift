@@ -8,3 +8,9 @@
 import Foundation
 
 
+struct Result: Codable {
+    let status: String
+    let totalResults: Int
+    let articles: [Article]
+}
+

@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+struct Article: Codable {
+    let author, title, description: String
+    let url: String
+    let urlToImage: String
+    let content: String
+}
+
+
