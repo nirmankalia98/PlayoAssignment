@@ -58,7 +58,9 @@ class NewsViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: NewsTableViewCell.identifier) as? NewsTableViewCell{
-            cell.articleVM = newsViewModel.articles[indexPath.row]
+            let vm = newsViewModel.articles[indexPath.row]
+            vm.getImage()
+            cell.articleVM = vm
             return cell
         }
         return UITableViewCell()
