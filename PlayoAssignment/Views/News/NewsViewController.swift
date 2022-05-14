@@ -16,6 +16,7 @@ class NewsViewController: UITableViewController {
     }()
     var newsViewModel: NewsViewModel!
     var cancellables = Set<AnyCancellable>()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCombineSubs()
@@ -54,9 +55,9 @@ class NewsViewController: UITableViewController {
                 }
             })
             .store(in: &cancellables)
-            
-            
     }
+    
+    
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return newsViewModel.articles.count
@@ -68,6 +69,15 @@ class NewsViewController: UITableViewController {
             return cell
         }
         return UITableViewCell()
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let article = newsViewModel.articles[indexPath.row]
+        let vc = ArticleViewController()
+        if let url = URL(string: article.url){
+            vc.url = url
+        }
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
     deinit{
