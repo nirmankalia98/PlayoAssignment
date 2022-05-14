@@ -20,6 +20,7 @@
 		FFE366DB282FC1BF00153CB8 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE366DA282FC1BF00153CB8 /* NetworkService.swift */; };
 		FFE366DD282FC22600153CB8 /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE366DC282FC22600153CB8 /* ArticleViewController.swift */; };
 		FFE366E1282FC47100153CB8 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE366E0282FC47100153CB8 /* NetworkError.swift */; };
+		FFE366E3282FE17500153CB8 /* ArticleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE366E2282FE17500153CB8 /* ArticleViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		FFE366DA282FC1BF00153CB8 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		FFE366DC282FC22600153CB8 /* ArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
 		FFE366E0282FC47100153CB8 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		FFE366E2282FE17500153CB8 /* ArticleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				FFE366D4282FC0D500153CB8 /* NewsViewModel.swift */,
+				FFE366E2282FE17500153CB8 /* ArticleViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -215,6 +218,7 @@
 				FFE366D3282FC0C100153CB8 /* Result.swift in Sources */,
 				FFE366B9282FBEF700153CB8 /* AppDelegate.swift in Sources */,
 				FFE366BB282FBEF700153CB8 /* SceneDelegate.swift in Sources */,
+				FFE366E3282FE17500153CB8 /* ArticleViewModel.swift in Sources */,
 				FFE366E1282FC47100153CB8 /* NetworkError.swift in Sources */,
 				FFE366D1282FBFEA00153CB8 /* Constants.swift in Sources */,
 			);

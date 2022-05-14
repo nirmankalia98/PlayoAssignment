@@ -21,6 +21,7 @@ class NewsViewController: UITableViewController {
         super.viewDidLoad()
         setupCombineSubs()
         tableView.register(NewsTableViewCell.self, forCellReuseIdentifier: NewsTableViewCell.identifier)
+        tableView.rowHeight = 100
         tableView.refreshControl = refreshView
         refreshView.addTarget(self, action: #selector(refreshData), for: .valueChanged)        
     }
@@ -64,17 +65,18 @@ class NewsViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("index",indexPath.row)
         if let cell = tableView.dequeueReusableCell(withIdentifier: NewsTableViewCell.identifier) as? NewsTableViewCell{
-            cell.article = newsViewModel.articles[indexPath.row]
+            cell.articleVM = newsViewModel.articles[indexPath.row]
             return cell
         }
         return UITableViewCell()
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let article = newsViewModel.articles[indexPath.row]
+        let articleVM = newsViewModel.articles[indexPath.row]
         let vc = ArticleViewController()
-        if let url = URL(string: article.url){
+        if let url = URL(string: articleVM.article.url){
             vc.url = url
         }
         self.navigationController?.pushViewController(vc, animated: true)

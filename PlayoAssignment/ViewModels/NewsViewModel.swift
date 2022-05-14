@@ -10,7 +10,7 @@ import Foundation
 
 class NewsViewModel: ObservableObject{
     @Published var isLoading = true
-    @Published var articles: [Article] = []
+    @Published var articles: [ArticleViewModel] = []
     private let newsUrlString = Constants.baseUrl + Constants.apiKey
     
     init(){
@@ -26,7 +26,7 @@ class NewsViewModel: ObservableObject{
         NetworkService.shared.fetchData(type: Result.self, url: url, completion: {[weak self] res in
             guard let res = res else {return}
             
-            self?.articles = res.articles
+            self?.articles = res.articles.map{ArticleViewModel(_article: $0)}
             self?.isLoading = false
             
         })

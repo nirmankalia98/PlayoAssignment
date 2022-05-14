@@ -7,19 +7,28 @@
 
 import Foundation
 import UIKit
-
+import Combine
 class NewsTableViewCell: UITableViewCell{
     static let identifier = "NewsTableViewCell"
     
-    var article: Article? {
+    private var cancellable = Set<AnyCancellable>()
+    var articleVM: ArticleViewModel? {
         didSet{
-            titleLabel.text = article?.title
-            authorLabel.text = article?.author
-            descriptionLabel.text = article?.description
-
+            titleLabel.text = articleVM?.article.title
+            authorLabel.text = articleVM?.article.author
+            descriptionLabel.text = articleVM?.article.description
+            setupListener()
         }
     }
     
+    func setupListener(){
+        articleVM?.$image
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: {[weak self] image in
+                self?.imgView.image = image
+            })
+            .store(in: &cancellable)
+    }
     
     private let stackView: UIStackView = {
         let stackView = UIStackView()
@@ -59,8 +68,8 @@ class NewsTableViewCell: UITableViewCell{
      }()
     
      
-     private let image : UIImageView = {
-         let imgView = UIImageView(image: UIImage(systemName: "person")!)
+     private let imgView : UIImageView = {
+         let imgView = UIImageView()
          imgView.clipsToBounds = true
          imgView.contentMode = .scaleToFill
          return imgView
@@ -82,6 +91,8 @@ class NewsTableViewCell: UITableViewCell{
         
     }
     
+    
+    
     private func setupStackView(){
         addSubview(stackView)
         
@@ -93,22 +104,24 @@ class NewsTableViewCell: UITableViewCell{
             stackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             stackView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor),
             stackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            stackView.leftAnchor.constraint(equalTo: image.rightAnchor,constant: 10)
+            stackView.leftAnchor.constraint(equalTo: imgView.rightAnchor,constant: 10)
             
         ])
     }
     
     private func setupImageConstraints(){
-        addSubview(image)
-        image.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(imgView)
+        imgView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            image.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            image.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor),
-            image.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            image.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.3)
+            imgView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            imgView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor),
+            imgView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            imgView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.3)
         ])
     }
     
-    
+    deinit {
+        cancellable.forEach{$0.cancel()}
+    }
     
 }
