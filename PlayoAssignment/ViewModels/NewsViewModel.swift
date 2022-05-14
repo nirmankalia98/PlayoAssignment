@@ -13,6 +13,10 @@ class NewsViewModel: ObservableObject{
     @Published var articles: [Article] = []
     private let newsUrlString = Constants.baseUrl + Constants.apiKey
     
+    init(){
+        getNewsArticles()
+    }
+    
     func getNewsArticles(){
         isLoading = true
         guard let url = URL(string: newsUrlString) else {
